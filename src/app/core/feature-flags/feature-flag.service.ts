@@ -5,6 +5,6 @@ import { Injectable, Signal } from '@angular/core';
 })
 export class FeatureFlagService {
   public isFeatureEnabled(feature: string): Promise<boolean> {
-    return Promise.resolve(false);
+    return Promise.resolve(true);
   }
 }

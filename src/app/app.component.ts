@@ -7,7 +7,7 @@ import { GreenAppleComponent } from './components/green-apple.component';
   selector: 'app-root',
   imports: [FeatureFlagComponent, RedAppleComponent, GreenAppleComponent],
   template: `
-    <app-feature-flag [name]="'red-apple'">
+    <app-feature-flag name="red-apple">
       <app-red-apple featureIsOn />
       <app-green-apple featureIsOff />
     </app-feature-flag>

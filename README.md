@@ -1,59 +1,44 @@
 # FeatureFlagClientUi
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.8.
+This project demonstrates:
 
-## Development server
+- Bootstrapping the application using the app-initializer
+- Loading application settings from the assets folder.
+- Conditionally rendering components based on feature flags
 
-To start a local development server, run:
+## How It Works
 
-```bash
-ng serve
+When the app bootstraps, app start is delayed until the application settings are loaded from the assets folder.
+
+The settings contain a connection string used to connect to Azure.
+
+The app component uses a helper component to conditionally render one of two components depending on the value of a feature flag.
+
+```html
+<app-feature-flag [name]="'red-apple'">
+    <app-red-apple featureIsOn />
+    <app-green-apple featureIsOff />
+</app-feature-flag>
 ```
+The API is straightforward.
+- If the value of feature flag 'red-apple' cannot be determined, nothing is rendered.
+- If the value of feature flag 'red-apple' is true, the 'app-red-apple' component is rendered.
+- If the value of feature flag 'red-apple' is false, the 'app-green-apple' component is rendered.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The selectors "featureIsOn" and "featureIsOff" act as markers on the components to which they're applied.
 
-## Code scaffolding
+The feature-flag component depends on the FeatureFlagService to supply the feature flag values which are obtained dynamically from azure.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Nothing is cached, so every time the app asks for a feature flag, Azure will be queried, and this is by design.
 
-```bash
-ng generate component component-name
-```
+It may well be the case that ultimately we choose not to directly query Azure from the frontend. However we end up doing it, the feature flag component and service provide a reasonable basic abstraction for getting feature flag checking into frontend code, whilst the implementation of the feature-flag service can be changed without much blast damage.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Getting Started
 
-```bash
-ng generate --help
-```
+- Install: `npm install`
+- Serve: `npm start`
+- Build: `npm run build`
 
-## Building
+## Credits
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This app was generated with [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0

@@ -1,9 +1,8 @@
-import { Component, ElementRef, inject, input, OnInit, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { FeatureFlagService } from './feature-flag.service';
 
 @Component({
   selector: 'app-feature-flag',
-  imports: [],
   template: `
     @if (isFeatureEnabled() !== undefined && isFeatureEnabled() === true) {
       <ng-content select="[featureIsOn]"></ng-content>

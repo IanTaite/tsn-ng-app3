@@ -1,4 +1,4 @@
-import { inject, Injectable, Signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AppConfigurationClient } from "@azure/app-configuration";
 import { ConfigurationService } from '../configuration/configuration.service';
 
